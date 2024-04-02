@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding ="UTF-8"?>
+
+<Configuration name="ConfigTest" status="WARN" monitorInterval="5">
+	<Properties>
+		<Property name="basePath">./logs</Property>
+	</Properties>
+	
+  <Appenders> <!--defines where do you want to generate logs?-->
+ 
+   <!--  <SystemPropertyArbiter propertyName="env" propertyValue="dev"> -->
+	   
+      <Console name="Console" target="SYSTEM_OUT">
+        <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      </Console>
+      
+      <RollingFile name="File" fileName="${basePath}/automation.log" filePattern="${basepath}/automation-%d{yyyy-MM-dd}.log">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		  <SizeBasedTriggeringPolicy size="5000"/>
+	  </RollingFile>
+   <!--  </SystemPropertyArbiter> 
+    <SystemPropertyArbiter propertyName="env" propertyValue="prod">
+      <List name="Out">
+      </List>
+    </SystemPropertyArbiter> -->
+ 
+  </Appenders>
+   <Loggers>
+   <!-- <Logger name="org.apache.test" level="trace" additivity="false">
+      <AppenderRef ref="Out"/>
+    </Logger> -->
+    <Root level="debug"> <!-- defines what type of logs to be generated, All<Trace<Debug<Info<Warn<Error<Fatal<Off -->
+    <!-- <AppenderRef ref="Console"/> -->
+      <AppenderRef ref="File"/>
+    </Root>
+  </Loggers>
+</Configuration>
